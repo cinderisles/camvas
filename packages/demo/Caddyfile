@@ -1,0 +1,6 @@
+localhost:3000 {
+	handle {
+		root * ./dist
+		file_server
+	}
+}
