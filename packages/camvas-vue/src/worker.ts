@@ -1,7 +1,6 @@
-import { load } from 'camvas'
+import { load } from 'camvas';
 
-load().then(message => {
-    console.log('msg', message)
-    postMessage(message)
-})
-
+load().then((message) => {
+  console.log('msg', message);
+  postMessage(message);
+});

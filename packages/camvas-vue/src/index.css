@@ -1,7 +1,9 @@
 @layer reset, base, tokens, recipes, utilities;
 
-html, body, #app {
-    height: 100%;
-    max-height: 100vh;
-    overflow: auto;
+html,
+body,
+#app {
+  height: 100%;
+  max-height: 100vh;
+  overflow: auto;
 }
