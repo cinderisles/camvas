@@ -2,5 +2,9 @@
   "workspaces": [
     "packages/*"
   ],
-  "packageManager": "yarn@4.1.0"
+  "packageManager": "yarn@4.1.0",
+  "dependencies": {
+    "prettier": "3.2.5",
+    "typescript": "5.2.2"
+  }
 }
