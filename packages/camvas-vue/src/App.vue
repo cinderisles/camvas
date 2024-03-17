@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import CamvasControls from './components/Controls.vue';
 import { useStyles } from './composables/styles';
+
 const worker = new Worker(new URL('./worker.ts', import.meta.url), {
   type: 'module',
 });
@@ -38,27 +40,6 @@ const { css, wFull, hFull } = useStyles();
       <canvas :class="css(wFull)"></canvas>
     </div>
 
-    <div
-      :class="
-        css(
-          {
-            bg: 'gray.800',
-            color: 'white',
-            padding: 2,
-          },
-          wFull,
-        )
-      "
-    >
-      <div
-        :class="
-          css({
-            display: 'flex',
-          })
-        "
-      ></div>
-
-      <button>select</button>
-    </div>
+    <CamvasControls />
   </div>
 </template>

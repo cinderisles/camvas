@@ -3,11 +3,11 @@
 /**
  * @param {number} width
  * @param {number} height
- * @param {Uint8Array} pixels
- * @returns {Uint8Array}
+ * @param {Uint8ClampedArray} pixels
+ * @returns {Uint8ClampedArray}
  */
 export function encode_png(
   width: number,
   height: number,
-  pixels: Uint8Array,
-): Uint8Array;
+  pixels: Uint8ClampedArray,
+): Uint8ClampedArray;
