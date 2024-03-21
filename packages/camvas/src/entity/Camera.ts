@@ -10,6 +10,7 @@ export class Camera {
   y: number;
   width: number;
   height: number;
+  lineWidth: number = 2.0;
 
   constructor(params: CameraConstructor) {
     this.x = params.x;
@@ -20,6 +21,7 @@ export class Camera {
 
   draw(context: CanvasRenderingContext2D) {
     context.strokeStyle = 'red';
+    context.lineWidth = this.lineWidth;
     context.strokeRect(this.x, this.y, this.width, this.height);
   }
 

@@ -1545,6 +1545,7 @@ const RAW_RUNTIME_STATE =
           ["camvas", "workspace:packages/camvas"],\
           ["@wasm-tool/rollup-plugin-rust", "npm:2.4.5"],\
           ["binaryen", "npm:111.0.0"],\
+          ["fflate", "npm:0.8.2"],\
           ["typescript", "patch:typescript@npm%3A5.2.2#optional!builtin<compat/typescript>::version=5.2.2&hash=f3b441"],\
           ["vite", "virtual:eb36918baf580fb8765f528dbc643b100ab842b95687851dfe45d0a080af7266048cd7c05c1d615368f99f4c957ca3c9a003cc692d870d10e546aa16639d7853#npm:5.1.4"]\
         ],\
@@ -1948,6 +1949,15 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["fastq", "npm:1.17.1"],\
           ["reusify", "npm:1.0.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["fflate", [\
+      ["npm:0.8.2", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/fflate-npm-0.8.2-5129f303f0-10c0.zip/node_modules/fflate/",\
+        "packageDependencies": [\
+          ["fflate", "npm:0.8.2"]\
         ],\
         "linkType": "HARD"\
       }]\

@@ -1,12 +1,15 @@
 import './style.css';
 import wasm from '../wasm/Cargo.toml';
 import { Camera } from './entity/Camera';
+import { zip, type AsyncZippableFile } from 'fflate';
 
 const canvas = document.querySelector('canvas');
 const context = canvas?.getContext('2d');
 let requestId: number | undefined = undefined;
 let zero: number | undefined = undefined;
 let prev: number | undefined = undefined;
+
+let images: ImageData[] = [];
 
 const record = (
   context: CanvasRenderingContext2D,
@@ -18,13 +21,15 @@ const record = (
   if (zero && timeStamp) {
     if (context && camera.width > 0 && camera.height > 0) {
       const image = context.getImageData(
-        camera.x,
-        camera.y,
-        camera.width,
-        camera.height,
+        camera.x + camera.lineWidth,
+        camera.y + camera.lineWidth,
+        camera.width - 2 * camera.lineWidth,
+        camera.height - 2 * camera.lineWidth,
       );
       w.encode_png(image.width, image.height, image.data);
       count++;
+
+      images.push(image);
 
       const elapsed = timeStamp - zero;
 
@@ -52,7 +57,9 @@ if (canvas && context) {
   let camera: Camera | null = null;
   let isRecording: boolean = false;
 
-  // Function to handle mouse down event
+  let rotationAngle = 0;
+  const rotationSpeed = 0.02;
+
   const handleMouseDown = (event: MouseEvent) => {
     isDrawing = true;
     startX = event.clientX - canvas.offsetLeft;
@@ -64,7 +71,6 @@ if (canvas && context) {
     }
   };
 
-  // Function to handle mouse move event
   const handleMouseMove = (event: MouseEvent) => {
     if (!isDrawing) return;
 
@@ -85,11 +91,8 @@ if (canvas && context) {
         height,
       });
     }
-
-    draw();
   };
 
-  // Function to handle mouse up event
   function handleMouseUp() {
     isDrawing = false;
     if (camera) {
@@ -101,15 +104,25 @@ if (canvas && context) {
     startY = 0;
   }
 
-  // Function to draw the camera on the canvas
   const draw = () => {
     context.clearRect(0, 0, canvas.width, canvas.height);
+
+    context.translate(canvas.width / 2, canvas.height / 2);
+    context.rotate(rotationAngle);
+    context.fillStyle = 'blue';
+    context.fillRect(-50, -25, 100, 50);
+    context.setTransform(1, 0, 0, 1, 0, 0);
+    rotationAngle += rotationSpeed;
+
     if (camera) {
       camera.draw(context);
     }
+
+    requestAnimationFrame(draw);
   };
 
-  // Event listeners
+  draw();
+
   canvas.addEventListener('mousedown', handleMouseDown);
   canvas.addEventListener('mousemove', handleMouseMove);
   canvas.addEventListener('mouseup', handleMouseUp);
@@ -121,7 +134,7 @@ if (canvas && context) {
 
   resizeObserver.observe(document.body);
 
-  window.addEventListener('keydown', (e) => {
+  window.addEventListener('keydown', async (e) => {
     if (e.code === 'KeyR') {
       isRecording = !isRecording;
       if (
@@ -133,20 +146,75 @@ if (canvas && context) {
       ) {
         console.log('recording');
 
-        wasm().then((w) => {
-          let count: number = 0;
-          requestId = requestAnimationFrame((t) => {
-            zero = t;
-            record(context, camera!, w, t, count);
-          });
+        const w = await wasm();
+        let count: number = 0;
+        requestId = requestAnimationFrame((t) => {
+          zero = t;
+          record(context, camera!, w, t, count);
         });
       } else {
         console.log('stopped recording');
         if (requestId) {
           cancelAnimationFrame(requestId);
         }
+
+        const temp = document.createElement('canvas');
+        const tempctx = temp.getContext('2d');
+
+        const entries = await Promise.all(
+          images.map((img, index) => {
+            tempctx?.clearRect(0, 0, temp.width, temp.height);
+            temp.width = img.width;
+            temp.height = img.height;
+            tempctx?.putImageData(img, 0, 0);
+
+            return new Promise<[PropertyKey, AsyncZippableFile]>(
+              (resolve, reject) => {
+                temp.toBlob((b) => {
+                  if (b) {
+                    resolve(
+                      b.arrayBuffer().then((a) => {
+                        const tee: [PropertyKey, AsyncZippableFile] = [
+                          `frame-${index}.png`,
+                          [
+                            new Uint8Array(a),
+                            {
+                              level: 0,
+                            },
+                          ],
+                        ];
+
+                        return tee;
+                      }),
+                    );
+                  } else {
+                    reject();
+                  }
+                });
+              },
+            );
+          }),
+        );
+
+        zip(Object.fromEntries(entries), (err, data) => {
+          if (err) {
+            console.error(err);
+            return;
+          }
+
+          const link = document.createElement('a');
+          link.href = URL.createObjectURL(
+            new Blob([data], {
+              type: 'application/zip',
+            }),
+          );
+          link.download = 'thing.zip';
+          document.body.appendChild(link);
+          link.click();
+        });
+
+        images = [];
       }
     }
   });
 }
-6;
