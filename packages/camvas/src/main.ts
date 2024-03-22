@@ -2,6 +2,9 @@ import './style.css';
 import wasm from '../wasm/Cargo.toml';
 import { Camera } from './entity/Camera';
 import { zip, type AsyncZippableFile } from 'fflate';
+import { FFmpeg } from '@ffmpeg/ffmpeg';
+import coreURL from '@ffmpeg/core?url';
+import wasmURL from '@ffmpeg/core/wasm?url';
 
 const canvas = document.querySelector('canvas');
 const context = canvas?.getContext('2d');
@@ -161,57 +164,122 @@ if (canvas && context) {
         const temp = document.createElement('canvas');
         const tempctx = temp.getContext('2d');
 
-        const entries = await Promise.all(
+        const ffmpeg = new FFmpeg();
+
+        ffmpeg.on('log', ({ message }) => {
+          console.log(message);
+        });
+
+        await ffmpeg.load({
+          coreURL,
+          wasmURL,
+        });
+        console.log('ffmpeg loaded');
+
+        await Promise.all(
           images.map((img, index) => {
             tempctx?.clearRect(0, 0, temp.width, temp.height);
             temp.width = img.width;
             temp.height = img.height;
             tempctx?.putImageData(img, 0, 0);
 
-            return new Promise<[PropertyKey, AsyncZippableFile]>(
-              (resolve, reject) => {
-                temp.toBlob((b) => {
-                  if (b) {
-                    resolve(
-                      b.arrayBuffer().then((a) => {
-                        const tee: [PropertyKey, AsyncZippableFile] = [
-                          `frame-${index}.png`,
-                          [
-                            new Uint8Array(a),
-                            {
-                              level: 0,
-                            },
-                          ],
-                        ];
-
-                        return tee;
-                      }),
-                    );
-                  } else {
-                    reject();
-                  }
-                });
-              },
-            );
+            return new Promise((resolve, reject) => {
+              temp.toBlob((b) => {
+                if (b) {
+                  resolve(
+                    b.arrayBuffer().then((a) => {
+                      ffmpeg.writeFile(`${index}-frame.png`, new Uint8Array(a));
+                    }),
+                  );
+                } else {
+                  reject();
+                }
+              });
+            });
           }),
         );
+        console.log('wrote files');
 
-        zip(Object.fromEntries(entries), (err, data) => {
-          if (err) {
-            console.error(err);
-            return;
-          }
+        await ffmpeg.exec([
+          '-r',
+          '144',
+          '-i',
+          '%01d-frame.png',
+          '-c:v',
+          'libvpx',
+          '-pix_fmt',
+          'yuv420p',
+          'video.webm',
+        ]);
+        console.log('created video.webm');
 
-          const link = document.createElement('a');
-          link.href = URL.createObjectURL(
-            new Blob([data], {
-              type: 'application/zip',
+        const v = await ffmpeg.readFile('video.webm');
+
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(
+          new Blob([v], {
+            type: 'video/webm',
+          }),
+        );
+        link.download = 'video.webm';
+        document.body.appendChild(link);
+        link.click();
+
+        let saveAsZip = false;
+
+        if (saveAsZip) {
+          const entries = await Promise.all(
+            images.map((img, index) => {
+              tempctx?.clearRect(0, 0, temp.width, temp.height);
+              temp.width = img.width;
+              temp.height = img.height;
+              tempctx?.putImageData(img, 0, 0);
+
+              return new Promise<[PropertyKey, AsyncZippableFile]>(
+                (resolve, reject) => {
+                  temp.toBlob((b) => {
+                    if (b) {
+                      resolve(
+                        b.arrayBuffer().then((a) => {
+                          const tee: [PropertyKey, AsyncZippableFile] = [
+                            `${index}-frame.png`,
+                            [
+                              new Uint8Array(a),
+                              {
+                                level: 0,
+                              },
+                            ],
+                          ];
+
+                          return tee;
+                        }),
+                      );
+                    } else {
+                      reject();
+                    }
+                  });
+                },
+              );
             }),
           );
-          link.download = 'thing.zip';
-          document.body.appendChild(link);
-          link.click();
-        });
+
+          zip(Object.fromEntries(entries), (err, data) => {
+            if (err) {
+              console.error(err);
+              return;
+            }
+
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(
+              new Blob([data], {
+                type: 'application/zip',
+              }),
+            );
+            link.download = 'thing.zip';
+            document.body.appendChild(link);
+            link.click();
+          });
+        }
 
         images = [];
       }

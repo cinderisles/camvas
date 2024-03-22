@@ -36,6 +36,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["envalid", "npm:8.0.0"],\
           ["prettier", "npm:3.2.5"],\
           ["typescript", "patch:typescript@npm%3A5.2.2#optional!builtin<compat/typescript>::version=5.2.2&hash=f3b441"]\
         ],\
@@ -532,6 +533,43 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/unplugged/@esbuild-win32-x64-npm-0.20.1-d1183f5277/node_modules/@esbuild/win32-x64/",\
         "packageDependencies": [\
           ["@esbuild/win32-x64", "npm:0.20.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@ffmpeg/core", [\
+      ["npm:0.12.6", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/@ffmpeg-core-npm-0.12.6-f60dbb01c1-10c0.zip/node_modules/@ffmpeg/core/",\
+        "packageDependencies": [\
+          ["@ffmpeg/core", "npm:0.12.6"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@ffmpeg/ffmpeg", [\
+      ["npm:0.12.10", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/@ffmpeg-ffmpeg-npm-0.12.10-bffd118ef7-10c0.zip/node_modules/@ffmpeg/ffmpeg/",\
+        "packageDependencies": [\
+          ["@ffmpeg/ffmpeg", "npm:0.12.10"],\
+          ["@ffmpeg/types", "npm:0.12.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@ffmpeg/types", [\
+      ["npm:0.12.2", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/@ffmpeg-types-npm-0.12.2-ba39d9570b-10c0.zip/node_modules/@ffmpeg/types/",\
+        "packageDependencies": [\
+          ["@ffmpeg/types", "npm:0.12.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@ffmpeg/util", [\
+      ["npm:0.12.1", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/@ffmpeg-util-npm-0.12.1-f6f14a29c4-10c0.zip/node_modules/@ffmpeg/util/",\
+        "packageDependencies": [\
+          ["@ffmpeg/util", "npm:0.12.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -1543,6 +1581,9 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./packages/camvas/",\
         "packageDependencies": [\
           ["camvas", "workspace:packages/camvas"],\
+          ["@ffmpeg/core", "npm:0.12.6"],\
+          ["@ffmpeg/ffmpeg", "npm:0.12.10"],\
+          ["@ffmpeg/util", "npm:0.12.1"],\
           ["@wasm-tool/rollup-plugin-rust", "npm:2.4.5"],\
           ["binaryen", "npm:111.0.0"],\
           ["fflate", "npm:0.8.2"],\
@@ -1818,6 +1859,16 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/env-paths-npm-2.2.1-7c7577428c-10c0.zip/node_modules/env-paths/",\
         "packageDependencies": [\
           ["env-paths", "npm:2.2.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["envalid", [\
+      ["npm:8.0.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/envalid-npm-8.0.0-42d6c3f74f-10c0.zip/node_modules/envalid/",\
+        "packageDependencies": [\
+          ["envalid", "npm:8.0.0"],\
+          ["tslib", "npm:2.6.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3368,6 +3419,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["root-workspace-0b6124", "workspace:."],\
+          ["envalid", "npm:8.0.0"],\
           ["prettier", "npm:3.2.5"],\
           ["typescript", "patch:typescript@npm%3A5.2.2#optional!builtin<compat/typescript>::version=5.2.2&hash=f3b441"]\
         ],\
@@ -3675,6 +3727,15 @@ const RAW_RUNTIME_STATE =
         "packagePeers": [\
           "@types/typescript",\
           "typescript"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["tslib", [\
+      ["npm:2.6.2", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/tslib-npm-2.6.2-4fc8c068d9-10c0.zip/node_modules/tslib/",\
+        "packageDependencies": [\
+          ["tslib", "npm:2.6.2"]\
         ],\
         "linkType": "HARD"\
       }]\

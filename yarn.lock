@@ -418,6 +418,36 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ffmpeg/core@npm:^0.12.6":
+  version: 0.12.6
+  resolution: "@ffmpeg/core@npm:0.12.6"
+  checksum: 10c0/7ae6828f3a45afb7c8eac9f2256cedc6c087356a8207e98fdc1ffbb5d12e93d299c1e59e4fa6835af914721c67c093cae6848c798b653f115b70c43c4620f96b
+  languageName: node
+  linkType: hard
+
+"@ffmpeg/ffmpeg@npm:^0.12.10":
+  version: 0.12.10
+  resolution: "@ffmpeg/ffmpeg@npm:0.12.10"
+  dependencies:
+    "@ffmpeg/types": "npm:^0.12.2"
+  checksum: 10c0/224185b24b4fe9d3d1d6d17e741205793f74b29cce04435d6c25e5d17b7e12b608e876a64ad33d3e92114d4f0079f4e2e4d809632b354ad1a5f775f5bdb1b8e6
+  languageName: node
+  linkType: hard
+
+"@ffmpeg/types@npm:^0.12.2":
+  version: 0.12.2
+  resolution: "@ffmpeg/types@npm:0.12.2"
+  checksum: 10c0/5c3f250c7ed828a3f66073504e3e92ee9f7cd73ddf3bbdf777263710beb6e757da3d7178b2bae29bef6d602abbc21b561bcc659455420d3aed1b30a535ca1d0a
+  languageName: node
+  linkType: hard
+
+"@ffmpeg/util@npm:^0.12.1":
+  version: 0.12.1
+  resolution: "@ffmpeg/util@npm:0.12.1"
+  checksum: 10c0/943cc8b886cdfd3c448d3618acc3fe02abda46472c11aefb9e90a4a814962142632e90ab475374357fddb6ba8176757dbbe434147e0cd1a8fcd5133f95bee0a6
+  languageName: node
+  linkType: hard
+
 "@iarna/toml@npm:^2.2.5":
   version: 2.2.5
   resolution: "@iarna/toml@npm:2.2.5"
@@ -1270,6 +1300,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "camvas@workspace:packages/camvas"
   dependencies:
+    "@ffmpeg/core": "npm:^0.12.6"
+    "@ffmpeg/ffmpeg": "npm:^0.12.10"
+    "@ffmpeg/util": "npm:^0.12.1"
     "@wasm-tool/rollup-plugin-rust": "npm:2.4.5"
     binaryen: "npm:111.0.0"
     fflate: "npm:0.8.2"
@@ -1491,6 +1524,15 @@ __metadata:
   version: 2.2.1
   resolution: "env-paths@npm:2.2.1"
   checksum: 10c0/285325677bf00e30845e330eec32894f5105529db97496ee3f598478e50f008c5352a41a30e5e72ec9de8a542b5a570b85699cd63bd2bc646dbcb9f311d83bc4
+  languageName: node
+  linkType: hard
+
+"envalid@npm:8.0.0":
+  version: 8.0.0
+  resolution: "envalid@npm:8.0.0"
+  dependencies:
+    tslib: "npm:2.6.2"
+  checksum: 10c0/8a12cdce071f54d780b2efa68ed77c1c1f397e44e47b2e23d9ec2130d7decc7502ffabff962760371e4eecf696a40a79188fdbd7bfc080d7283d484a8798c6e4
   languageName: node
   linkType: hard
 
@@ -2961,6 +3003,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
+    envalid: "npm:8.0.0"
     prettier: "npm:3.2.5"
     typescript: "npm:5.2.2"
   languageName: unknown
@@ -3219,6 +3262,13 @@ __metadata:
   bin:
     tsconfck: bin/tsconfck.js
   checksum: 10c0/8489244d9e8c0ed4e32b3f5b26151e2ea4204d2c8dd5ed770a8d892b4fba3ba415f4cd3ae9bed4f245d4426de0477bc11fbbce287ba1adfaa1fa0d4e7bae252e
+  languageName: node
+  linkType: hard
+
+"tslib@npm:2.6.2":
+  version: 2.6.2
+  resolution: "tslib@npm:2.6.2"
+  checksum: 10c0/e03a8a4271152c8b26604ed45535954c0a45296e32445b4b87f8a5abdb2421f40b59b4ca437c4346af0f28179780d604094eb64546bee2019d903d01c6c19bdb
   languageName: node
   linkType: hard
 
