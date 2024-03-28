@@ -22,12 +22,8 @@ export default defineConfig({
   },
   server: {
     fs: {
-      allow: [searchForWorkspaceRoot(process.cwd()), env.YARN_CACHE_FOLDER],
+      allow: [searchForWorkspaceRoot(process.cwd()),resolve(__dirname, '../../.yarn/cache') ],
     },
-    // headers: {
-    //   'Cross-Origin-Opener-Policy': 'same-origin',
-    //   'Cross-Origin-Embedder-Policy': 'require-corp',
-    // },
   },
   build: {
     lib: {
