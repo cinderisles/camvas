@@ -22,7 +22,10 @@ export default defineConfig({
   },
   server: {
     fs: {
-      allow: [searchForWorkspaceRoot(process.cwd()),resolve(__dirname, '../../.yarn/cache') ],
+      allow: [
+        searchForWorkspaceRoot(process.cwd()),
+        resolve(__dirname, '../../.yarn/cache'),
+      ],
     },
   },
   build: {

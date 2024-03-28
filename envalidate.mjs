@@ -1,6 +1,3 @@
 import { cleanEnv } from 'envalid';
 
-export default () =>
-  cleanEnv(process.env, {
-
-  });
+export default () => cleanEnv(process.env, {});
