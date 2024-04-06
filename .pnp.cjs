@@ -36,6 +36,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["@types/node", "npm:20.12.5"],\
           ["envalid", "npm:8.0.0"],\
           ["prettier", "npm:3.2.5"],\
           ["typescript", "patch:typescript@npm%3A5.2.2#optional!builtin<compat/typescript>::version=5.2.2&hash=f3b441"]\
@@ -1090,6 +1091,14 @@ const RAW_RUNTIME_STATE =
           ["@types/node", "npm:17.0.45"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:20.12.5", {\
+        "packageLocation": "./.yarn/cache/@types-node-npm-20.12.5-4856f14d45-2da65516fb.zip/node_modules/@types/node/",\
+        "packageDependencies": [\
+          ["@types/node", "npm:20.12.5"],\
+          ["undici-types", "npm:5.26.5"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["@vitejs/plugin-vue", [\
@@ -1586,6 +1595,7 @@ const RAW_RUNTIME_STATE =
           ["@ffmpeg/util", "npm:0.12.1"],\
           ["@wasm-tool/rollup-plugin-rust", "npm:2.4.5"],\
           ["binaryen", "npm:111.0.0"],\
+          ["dotenv", "npm:16.4.5"],\
           ["fflate", "npm:0.8.2"],\
           ["typescript", "patch:typescript@npm%3A5.2.2#optional!builtin<compat/typescript>::version=5.2.2&hash=f3b441"],\
           ["vite", "virtual:eb36918baf580fb8765f528dbc643b100ab842b95687851dfe45d0a080af7266048cd7c05c1d615368f99f4c957ca3c9a003cc692d870d10e546aa16639d7853#npm:5.1.4"]\
@@ -1797,6 +1807,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/detect-libc-npm-1.0.3-c30ac344d4-4da0deae9f.zip/node_modules/detect-libc/",\
         "packageDependencies": [\
           ["detect-libc", "npm:1.0.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["dotenv", [\
+      ["npm:16.4.5", {\
+        "packageLocation": "./.yarn/cache/dotenv-npm-16.4.5-bcb20eb95d-48d9287007.zip/node_modules/dotenv/",\
+        "packageDependencies": [\
+          ["dotenv", "npm:16.4.5"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3419,6 +3438,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["root-workspace-0b6124", "workspace:."],\
+          ["@types/node", "npm:20.12.5"],\
           ["envalid", "npm:8.0.0"],\
           ["prettier", "npm:3.2.5"],\
           ["typescript", "patch:typescript@npm%3A5.2.2#optional!builtin<compat/typescript>::version=5.2.2&hash=f3b441"]\
@@ -3761,6 +3781,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/ufo-npm-1.4.0-ca057b1d71-d9a3cb8c5f.zip/node_modules/ufo/",\
         "packageDependencies": [\
           ["ufo", "npm:1.4.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["undici-types", [\
+      ["npm:5.26.5", {\
+        "packageLocation": "./.yarn/cache/undici-types-npm-5.26.5-de4f7c7bb9-bb673d7876.zip/node_modules/undici-types/",\
+        "packageDependencies": [\
+          ["undici-types", "npm:5.26.5"]\
         ],\
         "linkType": "HARD"\
       }]\

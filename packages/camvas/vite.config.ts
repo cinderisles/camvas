@@ -2,7 +2,11 @@ import { defineConfig, searchForWorkspaceRoot } from 'vite';
 import { resolve } from 'path';
 import rust from '@wasm-tool/rollup-plugin-rust';
 import envalidate from '../../envalidate.mjs';
+import dotenv from 'dotenv';
 
+dotenv.config({
+  path: ['.env.local'],
+});
 const env = envalidate();
 
 console.log(env);
